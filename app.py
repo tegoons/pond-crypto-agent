@@ -88,7 +88,9 @@ def manifest():
         "output_modes": ["text/markdown"]
     }
 
-
+@app.get("/tasks/{task_id}", dependencies=[Depends(check_auth)])
+def get_task(task_id: str):
+    raise HTTPException(status_code=404, detail="Task not found")
 @app.post("/runs")
 def run_agent(
     request: RunRequest,
