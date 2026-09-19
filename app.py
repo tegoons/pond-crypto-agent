@@ -276,4 +276,13 @@ def root():
     return {
         "status": "ok",
         "agent": "Crypto Research AI"
-    }
+    @app.get(
+    "/tasks/{task_id}",
+    dependencies=[Depends(authenticate_pond)]
+)
+def get_task(task_id: str):
+    fail(
+        404,
+        "task_not_found",
+        "The requested task was not found."
+    )
